@@ -3,6 +3,8 @@ using GreenStoreKata;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GreenStoreTests
 {
