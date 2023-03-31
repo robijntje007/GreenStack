@@ -12,35 +12,35 @@ namespace GreenStoreTests
         {
             Console.WriteLine("OMGHAI!");
 
-            IList<Item> Items = new List<Item>{
-                new Item {Name = "+3 Agility Vest", SellIn = 10, Quality = 20},
-                new Item {Name = "Aged Cheddar", SellIn = 2, Quality = 0},
-                new Item {Name = "Elixir of the Bear", SellIn = 5, Quality = 7},
-                new Item {Name = "Longclaw", SellIn = 0, Quality = 80},
-                new Item {Name = "Longclaw", SellIn = -1, Quality = 80},
+            var items = new List<Item>{
+                new Item {Name = ItemList.ThreeAgilityVest, SellIn = 10, Quality = 20},
+                new Item {Name = ItemList.AgedCheddar, SellIn = 2, Quality = 0},
+                new Item {Name = ItemList.ElixirOfTheBear, SellIn = 5, Quality = 7},
+                new Item {Name = ItemList.Longclaw, SellIn = 0, Quality = 80},
+                new Item {Name = ItemList.Longclaw, SellIn = -1, Quality = 80},
                 new Item
                 {
-                    Name = "VIP tickets to a Samurai concert",
+                    Name = ItemList.VIPTicketsToASamuraiConcert,
                     SellIn = 15,
                     Quality = 20
                 },
                 new Item
                 {
-                    Name = "VIP tickets to a Samurai concert",
+                    Name = ItemList.VIPTicketsToASamuraiConcert,
                     SellIn = 10,
                     Quality = 49
                 },
                 new Item
                 {
-                    Name = "VIP tickets to a Samurai concert",
+                    Name = ItemList.VIPTicketsToASamuraiConcert,
                     SellIn = 5,
                     Quality = 49
                 },
                 // this conjured item does not work properly yet
-                new Item {Name = "Conjured Charisma Potion", SellIn = 3, Quality = 6}
+                new Item {Name = ItemList.ConjuredCharismaPotion, SellIn = 3, Quality = 6}
             };
 
-            var app = new GreenStore(Items);
+            var app = new GreenStoreKata.GreenStore(items);
 
             int days = 30;
             if (args.Length > 0)
@@ -51,14 +51,52 @@ namespace GreenStoreTests
             for (var i = 0; i < days; i++)
             {
                 Console.WriteLine("-------- day " + i + " --------");
-                Console.WriteLine("name, sellIn, quality");
-                for (var j = 0; j < Items.Count; j++)
+                //Console.WriteLine("name, sellIn, quality");
+                WriteName("name");
+                Console.Write(", ");
+                WriteSellIn("sellIn");
+                Console.Write(", ");
+                WriteQuality("quality");
+                Console.WriteLine("");
+
+                for (var j = 0; j < items.Count; j++)
                 {
-                    System.Console.WriteLine(Items[j].Name + ", " + Items[j].SellIn + ", " + Items[j].Quality);
+                    WriteName(items[j].Name);
+                    Console.Write(", ");
+                    WriteSellIn(items[j].SellIn.ToString());
+                    Console.Write(", ");
+                    WriteQuality(items[j].Quality.ToString());
+                    Console.WriteLine("");
+                    //System.Console.WriteLine(items[j].Name + ", " + items[j].SellIn + ", " + items[j].Quality);
                 }
                 Console.WriteLine("");
                 app.UpdateQuality();
             }
+
         }
+
+        private static void WriteName(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(text);
+            ResetColor();
+        }
+        private static void WriteSellIn(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(text);
+            ResetColor();
+        }
+        private static void WriteQuality(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.Write(text);
+            ResetColor();
+
+        }
+        private static void ResetColor() =>
+            Console.ForegroundColor = DefaultColor;
+
+        private static ConsoleColor DefaultColor = ConsoleColor.White;
     }
 }
