@@ -101,7 +101,6 @@ namespace GreenStoreTests
                     case >= 11:
                         items.ShouldAll().HaveQualityOf(0).And.HaveSellInOf(1);//Past due
                         break;
-
                 }
             }
         }
